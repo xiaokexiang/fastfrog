@@ -12,7 +12,7 @@ import json
 
 import requests
 
-from fastfrog.config import *
+from config import *
 
 
 def push(news, corp_id, corp_secret):
@@ -35,7 +35,7 @@ def push_news(news, access_token):
     if access_token is None:
         print('access_token不能为None')
         exit(101)
-    resp = requests.post(str.format(PUSH_MESSAGE, access_token), headers=headers, proxies=proxies,
+    resp = requests.post(str.format(PUSH_MESSAGE, access_token),
                          data=json.dumps(news))
     if dict(json.loads(resp.text)).get('errmsg') == 'ok':
         print('push message success!')

@@ -3,7 +3,7 @@ import os
 
 import requests
 
-from fastfrog import config, utils
+import config, utils
 
 if __name__ == '__main__':
     if os.environ.get('CORP_ID') is None \
@@ -29,21 +29,14 @@ if __name__ == '__main__':
             msg = str(json.loads(response.text).get('message'))
     utils.push({
         "chatid": "CHATID",
-        "msgtype": "news",
+        "msgtype": "textcard",
         "touser": to_user,
         "agentid": agent_id,
-        "news": {
-            "chatid": "CHATID",
-            "msgtype": "textcard",
-            "touser": to_user,
-            "agentid": agent_id,
-            "textcard": {
-                "title": '速蛙云签到',
-                "description": msg,
-                "url": "https://faster.goodfrog1.net/",
-                "btntxt": "更多"
-            },
-            "safe": 0
+        "textcard": {
+            "title": '速蛙云签到通知',
+            "description": msg,
+            "url": "https://faster.goodfrog1.net/",
+            "btntxt": "更多"
         },
         "safe": 0
     }, corp_id, corp_secret)
